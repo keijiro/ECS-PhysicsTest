@@ -1,3 +1,4 @@
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
@@ -9,6 +10,7 @@ using Klak.Math;
 [UpdateBefore(typeof(PhysicsSystemGroup))]
 public partial struct StirSystem : ISystem
 {
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var elapsed = (float)SystemAPI.Time.ElapsedTime;
