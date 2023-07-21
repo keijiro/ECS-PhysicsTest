@@ -2,6 +2,8 @@ using UnityEngine;
 using Unity.Mathematics;
 using Random = Unity.Mathematics.Random;
 
+namespace EcsPhysicsTest.Benchmark {
+
 sealed class SpawnBehavior : MonoBehaviour
 {
     [field:SerializeField] public GameObject Prefab = null;
@@ -30,3 +32,5 @@ sealed class SpawnBehavior : MonoBehaviour
                 }
     }
 }
+
+} // namespace EcsPhysicsTest.Benchmark

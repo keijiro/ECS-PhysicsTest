@@ -4,16 +4,18 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+namespace EcsPhysicsTest.Benchmark {
+
 [UpdateInGroup(typeof(InitializationSystemGroup))]
 public partial struct SpawnSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
-      => state.RequireForUpdate<Config>();
+      => state.RequireForUpdate<Benchmark>();
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var config = SystemAPI.GetSingleton<Config>();
+        var config = SystemAPI.GetSingleton<Benchmark>();
 
         var totalCount = config.Dimensions.x * config.Dimensions.y * config.Dimensions.z;
         var instances = state.EntityManager.Instantiate(config.Prefab, totalCount, Allocator.Temp);
@@ -39,3 +41,5 @@ public partial struct SpawnSystem : ISystem
         state.Enabled = false;
     }
 }
+
+} // namespace EcsPhysicsTest.Benchmark

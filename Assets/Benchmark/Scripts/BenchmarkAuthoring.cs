@@ -2,7 +2,9 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-public struct Config : IComponentData
+namespace EcsPhysicsTest.Benchmark {
+
+public struct Benchmark : IComponentData
 {
     public Entity Prefab;
     public int3 Dimensions;
@@ -10,18 +12,18 @@ public struct Config : IComponentData
     public uint RandomSeed;
 }
 
-public class ConfigAuthoring : MonoBehaviour
+public class BenchmarkAuthoring : MonoBehaviour
 {
     public GameObject Prefab = null;
     public int3 Dimensions = 10;
     public float Interval = 0.1f;
     public uint RandomSeed = 12345;
 
-    class Baker : Baker<ConfigAuthoring>
+    class Baker : Baker<BenchmarkAuthoring>
     {
-        public override void Bake(ConfigAuthoring src)
+        public override void Bake(BenchmarkAuthoring src)
         {
-            var data = new Config()
+            var data = new Benchmark()
             {
                 Prefab = GetEntity(src.Prefab, TransformUsageFlags.Dynamic),
                 Dimensions = src.Dimensions,
@@ -32,3 +34,5 @@ public class ConfigAuthoring : MonoBehaviour
         }
     }
 }
+
+} // namespace EcsPhysicsTest.Benchmark

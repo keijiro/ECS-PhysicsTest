@@ -6,6 +6,8 @@ using Unity.Physics.Systems;
 using Unity.Transforms;
 using Klak.Math;
 
+namespace EcsPhysicsTest.Benchmark {
+
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateBefore(typeof(PhysicsSystemGroup))]
 public partial struct StirSystem : ISystem
@@ -37,3 +39,5 @@ public partial struct StirSystem : ISystem
         }
     }
 }
+
+} // namespace EcsPhysicsTest.Benchmark

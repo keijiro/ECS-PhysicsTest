@@ -2,6 +2,8 @@ using UnityEngine;
 using Unity.Mathematics;
 using Klak.Math;
 
+namespace EcsPhysicsTest.Benchmark {
+
 sealed class StirBehavior : MonoBehaviour
 {
     [field:SerializeField] public float3 Angles = 10;
@@ -21,3 +23,5 @@ sealed class StirBehavior : MonoBehaviour
         GetComponent<Rigidbody>().MoveRotation(quaternion.Euler(rot));
     }
 }
+
+} // namespace EcsPhysicsTest.Benchmark

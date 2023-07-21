@@ -2,6 +2,8 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
+namespace EcsPhysicsTest.Benchmark {
+
 public struct Stir : IComponentData
 {
     public float3 Angles;
@@ -29,3 +31,5 @@ public class StirAuthoring : MonoBehaviour
         }
     }
 }
+
+} // namespace EcsPhysicsTest.Benchmark
