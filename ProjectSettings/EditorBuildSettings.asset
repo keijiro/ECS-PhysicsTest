@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BenchmarkECS.unity
+    path: Assets/Benchmark/BenchmarkECS.unity
     guid: 3d1ee5439f956e9429f8810e46e94930
   m_configObjects: {}
