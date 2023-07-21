@@ -33,26 +33,28 @@ struct BlowerJob : ITriggerEventsJob
     [ReadOnly] public ComponentLookup<PhysicsMass> MassGroup;
     public ComponentLookup<PhysicsVelocity> VelocityGroup;
 
-    public void Execute(TriggerEvent triggerEvent)
+    [BurstCompile]
+    public void Execute(TriggerEvent ev)
     {
-        var a_entity = triggerEvent.EntityA;
-        var b_entity = triggerEvent.EntityB;
+        var aIsBlower = BlowerGroup.HasComponent(ev.EntityA);
+        var bIsBlower = BlowerGroup.HasComponent(ev.EntityB);
 
-        var a_hasBlower = BlowerGroup.HasComponent(a_entity);
-        var b_hasBlower = BlowerGroup.HasComponent(b_entity);
+        var aIsObject = VelocityGroup.HasComponent(ev.EntityA);
+        var bIsObject = VelocityGroup.HasComponent(ev.EntityB);
 
-        var a_hasVelocity = VelocityGroup.HasComponent(a_entity);
-        var b_hasVelocity = VelocityGroup.HasComponent(b_entity);
+        // We only process blower/object case.
+        // (Reject blower/blower and object/object cases.)
+        if (!(aIsBlower ^ bIsBlower)) return;
+        if (!(aIsObject ^ bIsObject)) return;
 
-        if (!(a_hasBlower ^ b_hasBlower)) return;
-        if (!(a_hasVelocity ^ b_hasVelocity)) return;
+        var (blowerEntity, objectEntity) =
+          aIsBlower ? (ev.EntityA, ev.EntityB) : (ev.EntityB, ev.EntityA);
 
-        var blower = BlowerGroup[a_hasBlower ? a_entity : b_entity];
+        var blower = BlowerGroup[blowerEntity];
+        var mass = MassGroup[objectEntity];
+        var velocity = VelocityGroup.GetRefRW(objectEntity);
 
-        var v_entity = a_hasVelocity ? a_entity : b_entity;
-
-        VelocityGroup.GetRefRW(v_entity).ValueRW.ApplyLinearImpulse
-          (MassGroup[v_entity], math.float3(0, blower.Force, 0));
+        velocity.ValueRW.ApplyLinearImpulse(mass, blower.Impulse);
     }
 }
 
