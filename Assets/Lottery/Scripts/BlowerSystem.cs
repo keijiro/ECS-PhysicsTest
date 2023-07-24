@@ -20,7 +20,8 @@ public partial struct BlowerSystem : ISystem
         {
             BlowerGroup = SystemAPI.GetComponentLookup<Blower>(),
             MassGroup = SystemAPI.GetComponentLookup<PhysicsMass>(),
-            VelocityGroup = SystemAPI.GetComponentLookup<PhysicsVelocity>()
+            VelocityGroup = SystemAPI.GetComponentLookup<PhysicsVelocity>(),
+            DeltaTime = SystemAPI.Time.DeltaTime
         };
         state.Dependency = job.Schedule(simulation, state.Dependency);
     }
@@ -32,6 +33,7 @@ struct BlowerJob : ITriggerEventsJob
     [ReadOnly] public ComponentLookup<Blower> BlowerGroup;
     [ReadOnly] public ComponentLookup<PhysicsMass> MassGroup;
     public ComponentLookup<PhysicsVelocity> VelocityGroup;
+    public float DeltaTime;
 
     [BurstCompile]
     public void Execute(TriggerEvent ev)
@@ -54,7 +56,7 @@ struct BlowerJob : ITriggerEventsJob
         var mass = MassGroup[objectEntity];
         var velocity = VelocityGroup.GetRefRW(objectEntity);
 
-        velocity.ValueRW.ApplyLinearImpulse(mass, blower.Impulse);
+        velocity.ValueRW.ApplyLinearImpulse(mass, blower.Force * DeltaTime);
     }
 }
 

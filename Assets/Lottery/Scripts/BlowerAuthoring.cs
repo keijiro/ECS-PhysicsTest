@@ -6,18 +6,18 @@ namespace EcsPhysicsTest.Lottery {
 
 public struct Blower : IComponentData
 {
-    public float3 Impulse;
+    public float3 Force;
 }
 
 public class BlowerAuthoring : MonoBehaviour
 {
-    public float3 Impulse = math.float3(0, 1, 0);
+    public float3 Force = math.float3(0, 100, 0);
 
     class Baker : Baker<BlowerAuthoring>
     {
         public override void Bake(BlowerAuthoring src)
         {
-            var data = new Blower() { Impulse = src.Impulse };
+            var data = new Blower() { Force = src.Force };
             AddComponent(GetEntity(TransformUsageFlags.None), data);
         }
     }
