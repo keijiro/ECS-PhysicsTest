@@ -10,12 +10,12 @@ namespace EcsPhysicsTest.Lottery {
 [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
 public partial class RollbackSystem : SystemBase
 {
-    NativeArray<(LocalTransform xform, PhysicsVelocity velocity)> _record;
-
     public static void RequestSave() => _request.save = true;
     public static void RequestLoad() => _request.load = true;
 
     static (bool save, bool load) _request;
+
+    NativeArray<(LocalTransform xform, PhysicsVelocity velocity)> _record;
 
     protected override void OnCreate()
       => RequireForUpdate<Lottery>();
@@ -27,21 +27,19 @@ public partial class RollbackSystem : SystemBase
         var record = _record;
         var i = 0;
 
-        Entities.ForEach((ref LocalTransform xform,
-                          ref PhysicsVelocity velocity) =>
-            {
-                xform = record[i].xform;
-                velocity = record[i].velocity;
-                i++;
-            }
-        ).Schedule();
+        Entities.ForEach( (ref LocalTransform xform,
+                           ref PhysicsVelocity velocity) =>
+                          (xform, velocity) = record[i++]
+                        ).Schedule();
     }
 
     void SaveState()
     {
         var count = 0;
-        Entities.ForEach((in LocalTransform xform,
-                          in PhysicsVelocity velocity) => count++).Run();
+        Entities.ForEach( (in LocalTransform xform,
+                           in PhysicsVelocity velocity) =>
+                          count++
+                        ).Run();
 
         if (_record.IsCreated) _record.Dispose();
 
@@ -50,17 +48,15 @@ public partial class RollbackSystem : SystemBase
         var record = _record;
 
         var i = 0;
-        Entities.ForEach((in LocalTransform xform,
-                          in PhysicsVelocity velocity) =>
-            {
-                record[i++] = (xform, velocity);
-            }
-        ).Run();
+        Entities.ForEach( (in LocalTransform xform,
+                           in PhysicsVelocity velocity) =>
+                          record[i++] = (xform, velocity)
+                        ).Schedule();
     }
 
     protected override void OnUpdate()
     {
-        if (_request.save|| true) SaveState();
+        if (_request.save) SaveState();
         if (_request.load) LoadState();
         _request = (false, false);
     }
