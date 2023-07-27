@@ -25,7 +25,7 @@ public partial struct SpawnSystem : ISystem
         for (var i = 0; i < config.SpawnCount; i++)
             SetTransform(ref state, instances[i],
                          GetBoxPosition(i, config.StackCount),
-                         quaternion.RotateY(i * 0.1f));
+                         quaternion.RotateY(i * 0.7f));
 
         state.Enabled = false;
     }
