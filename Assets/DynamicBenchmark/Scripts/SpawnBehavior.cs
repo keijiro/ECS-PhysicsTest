@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Mathematics;
 using Random = Unity.Mathematics.Random;
 
-namespace EcsPhysicsTest.Benchmark {
+namespace EcsPhysicsTest.DynamicBenchmark {
 
 sealed class SpawnBehavior : MonoBehaviour
 {
@@ -33,4 +33,4 @@ sealed class SpawnBehavior : MonoBehaviour
     }
 }
 
-} // namespace EcsPhysicsTest.Benchmark
+} // namespace EcsPhysicsTest.DynamicBenchmark

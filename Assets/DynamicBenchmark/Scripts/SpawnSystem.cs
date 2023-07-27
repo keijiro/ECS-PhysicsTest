@@ -4,7 +4,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace EcsPhysicsTest.Benchmark {
+namespace EcsPhysicsTest.DynamicBenchmark {
 
 [UpdateInGroup(typeof(InitializationSystemGroup))]
 public partial struct SpawnSystem : ISystem
@@ -42,4 +42,4 @@ public partial struct SpawnSystem : ISystem
     }
 }
 
-} // namespace EcsPhysicsTest.Benchmark
+} // namespace EcsPhysicsTest.DynamicBenchmark

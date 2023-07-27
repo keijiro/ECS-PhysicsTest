@@ -4,24 +4,24 @@ using UnityEngine;
 
 namespace EcsPhysicsTest.StaticBenchmark {
 
-public struct StaticBenchmark : IComponentData
+public struct Benchmark : IComponentData
 {
     public Entity Prefab;
     public int SpawnCount;
     public int StackCount;
 }
 
-public class StaticBenchmarkAuthoring : MonoBehaviour
+public class BenchmarkAuthoring : MonoBehaviour
 {
     public GameObject Prefab = null;
     public int SpawnCount = 100;
     public int StackCount = 5;
 
-    class Baker : Baker<StaticBenchmarkAuthoring>
+    class Baker : Baker<BenchmarkAuthoring>
     {
-        public override void Bake(StaticBenchmarkAuthoring src)
+        public override void Bake(BenchmarkAuthoring src)
         {
-            var data = new StaticBenchmark()
+            var data = new Benchmark()
             {
                 Prefab = GetEntity(src.Prefab, TransformUsageFlags.Dynamic),
                 SpawnCount = src.SpawnCount,
@@ -32,4 +32,4 @@ public class StaticBenchmarkAuthoring : MonoBehaviour
     }
 }
 
-} // namespace EcsPhysicsTest.Static
+} // namespace EcsPhysicsTest.StaticBenchmark

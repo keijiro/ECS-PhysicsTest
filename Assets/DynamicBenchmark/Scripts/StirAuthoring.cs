@@ -2,7 +2,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace EcsPhysicsTest.Benchmark {
+namespace EcsPhysicsTest.DynamicBenchmark {
 
 public struct Stir : IComponentData
 {
@@ -32,4 +32,4 @@ public class StirAuthoring : MonoBehaviour
     }
 }
 
-} // namespace EcsPhysicsTest.Benchmark
+} // namespace EcsPhysicsTest.DynamicBenchmark

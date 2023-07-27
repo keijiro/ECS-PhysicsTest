@@ -6,7 +6,7 @@ using Unity.Physics.Systems;
 using Unity.Transforms;
 using Klak.Math;
 
-namespace EcsPhysicsTest.Benchmark {
+namespace EcsPhysicsTest.DynamicBenchmark {
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateBefore(typeof(PhysicsSystemGroup))]
@@ -40,4 +40,4 @@ public partial struct StirSystem : ISystem
     }
 }
 
-} // namespace EcsPhysicsTest.Benchmark
+} // namespace EcsPhysicsTest.DynamicBenchmark

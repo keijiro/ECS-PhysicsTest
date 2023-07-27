@@ -9,12 +9,12 @@ namespace EcsPhysicsTest.StaticBenchmark {
 public partial struct SpawnSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
-      => state.RequireForUpdate<StaticBenchmark>();
+      => state.RequireForUpdate<Benchmark>();
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var config = SystemAPI.GetSingleton<StaticBenchmark>();
+        var config = SystemAPI.GetSingleton<Benchmark>();
 
         var instances = state.EntityManager.Instantiate
           (config.Prefab, config.SpawnCount, Allocator.Temp);

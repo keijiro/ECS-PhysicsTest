@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Mathematics;
 using Klak.Math;
 
-namespace EcsPhysicsTest.Benchmark {
+namespace EcsPhysicsTest.DynamicBenchmark {
 
 sealed class StirBehavior : MonoBehaviour
 {
@@ -24,4 +24,4 @@ sealed class StirBehavior : MonoBehaviour
     }
 }
 
-} // namespace EcsPhysicsTest.Benchmark
+} // namespace EcsPhysicsTest.DynamicBenchmark
