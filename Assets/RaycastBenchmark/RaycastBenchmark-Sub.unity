@@ -317,11 +317,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8995f72454cb63645acb46bf25cb0bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 7777786990337147993, guid: 1afaf349a0cf4fc48b798eb1391d8af9, type: 3}
-  SpawnCount: 1000
+  BoardPrefab: {fileID: 7777786990337147993, guid: 1afaf349a0cf4fc48b798eb1391d8af9, type: 3}
+  BoardCount: 1000
+  LinePrefab: {fileID: 2501068351136642167, guid: a978ffec8b0e6d949a65b444b01ddccd, type: 3}
+  LineCount: 1000
   SpawnRadius: 10
   RandomSeed: 12345
-  Iteration: 100
 --- !u!1 &989639190
 GameObject:
   m_ObjectHideFlags: 0

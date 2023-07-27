@@ -6,20 +6,26 @@ namespace EcsPhysicsTest.RaycastBenchmark {
 
 public struct Benchmark : IComponentData
 {
-    public Entity Prefab;
-    public int SpawnCount;
+    public Entity BoardPrefab;
+    public int BoardCount;
+
+    public Entity LinePrefab;
+    public int LineCount;
+
     public float SpawnRadius;
     public uint RandomSeed;
-    public int Iteration;
 }
 
 public class BenchmarkAuthoring : MonoBehaviour
 {
-    public GameObject Prefab = null;
-    public int SpawnCount = 10;
+    public GameObject BoardPrefab = null;
+    public int BoardCount = 100;
+
+    public GameObject LinePrefab = null;
+    public int LineCount = 100;
+
     public float SpawnRadius = 1;
     public uint RandomSeed = 12345;
-    public int Iteration = 100;
 
     class Baker : Baker<BenchmarkAuthoring>
     {
@@ -27,11 +33,16 @@ public class BenchmarkAuthoring : MonoBehaviour
         {
             var data = new Benchmark()
             {
-                Prefab = GetEntity(src.Prefab, TransformUsageFlags.Dynamic),
-                SpawnCount = src.SpawnCount,
+                BoardPrefab = GetEntity
+                  (src.BoardPrefab, TransformUsageFlags.Dynamic),
+                BoardCount = src.BoardCount,
+
+                LinePrefab = GetEntity
+                  (src.LinePrefab, TransformUsageFlags.Dynamic),
+                LineCount = src.LineCount,
+
                 SpawnRadius = src.SpawnRadius,
                 RandomSeed = src.RandomSeed,
-                Iteration = src.Iteration
             };
             AddComponent(GetEntity(TransformUsageFlags.None), data);
         }

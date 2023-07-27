@@ -7,6 +7,7 @@
     "com.unity.test-framework": "1.1.33",
     "jp.keijiro.klak.math": "2.1.0",
     "jp.keijiro.metatex": "1.0.4",
+    "jp.keijiro.metawire": "2.0.0",
     "com.unity.modules.uielements": "1.0.0"
   },
   "scopedRegistries": [
