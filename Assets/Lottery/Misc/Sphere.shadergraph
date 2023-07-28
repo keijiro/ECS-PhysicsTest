@@ -227,10 +227,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -717.71435546875,
-            "y": 386.857177734375,
-            "width": 127.42852783203125,
-            "height": 34.28570556640625
+            "x": -582.2857055664063,
+            "y": 448.5714416503906,
+            "width": 127.42855834960938,
+            "height": 34.285736083984378
         }
     },
     "m_Slots": [
@@ -263,10 +263,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -797.1429443359375,
-            "y": 219.42857360839845,
-            "width": 207.42864990234376,
-            "height": 133.1428985595703
+            "x": -661.7142944335938,
+            "y": 281.14288330078127,
+            "width": 206.85714721679688,
+            "height": 133.14288330078126
         }
     },
     "m_Slots": [
@@ -366,10 +366,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -720.571533203125,
-            "y": 352.57147216796877,
-            "width": 130.28570556640626,
-            "height": 34.28570556640625
+            "x": -585.1428833007813,
+            "y": 414.2857666015625,
+            "width": 130.28573608398438,
+            "height": 34.285675048828128
         }
     },
     "m_Slots": [
@@ -600,7 +600,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.9200000166893005,
+    "m_Value": 0.25,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -901,9 +901,9 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -386.857177734375,
-            "y": 200.00001525878907,
-            "width": 209.14285278320313,
-            "height": 303.4285888671875
+            "y": 200.0,
+            "width": 296.5715026855469,
+            "height": 351.4285888671875
         }
     },
     "m_Slots": [
@@ -937,7 +937,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "CustomTextureSampling",
     "m_FunctionSource": "",
-    "m_FunctionBody": "float u = atan2(OPos.z, OPos.x);\nu = (u / PI + 1) / 2;\nfloat v = OPos.y;\nfloat2 uv = float2(u * 10, v * 2);\nfloat mask = 1 - smoothstep(Thresh - 0.01, Thresh, abs(v));\nOutput = lerp(Color, tex2D(Tex, uv).rgb, mask);\n"
+    "m_FunctionBody": "float2 uv;\nuv.x = atan2(OPos.z, OPos.x);\nuv.y = atan2(length(OPos.zx), OPos.y);\nuv /= PI;\n\nfloat mask = 1 - abs(uv.y * 2 - 1);\nmask = smoothstep(Thresh, Thresh + 0.01, mask);\n\nOutput = lerp(Color, tex2D(Tex, uv * 8).rgb, mask);"
 }
 
 {
