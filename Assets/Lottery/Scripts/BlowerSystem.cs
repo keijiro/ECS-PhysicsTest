@@ -8,8 +8,7 @@ using Unity.Physics.Systems;
 
 namespace EcsPhysicsTest.Lottery {
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateAfter(typeof(PhysicsSystemGroup))]
+[UpdateInGroup(typeof(AfterPhysicsSystemGroup))]
 public partial struct BlowerSystem : ISystem
 {
     [BurstCompile]

@@ -8,8 +8,7 @@ using Klak.Math;
 
 namespace EcsPhysicsTest.DynamicBenchmark {
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateBefore(typeof(PhysicsSystemGroup))]
+[UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
 public partial struct StirSystem : ISystem
 {
     [BurstCompile]
