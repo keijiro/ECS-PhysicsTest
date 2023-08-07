@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Benchmark/DynamicBenchmark/DynamicBenchmarkECS.unity
-    guid: 3d1ee5439f956e9429f8810e46e94930
+    path: Assets/Lottery/Lottery.unity
+    guid: 23d30d6490f85f2468b2f0195f778cda
   m_configObjects: {}
