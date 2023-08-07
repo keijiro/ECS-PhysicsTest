@@ -406,6 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 908324174}
   - component: {fileID: 908324175}
+  - component: {fileID: 908324176}
   m_Layer: 0
   m_Name: Config
   m_TagString: Untagged
@@ -444,6 +445,52 @@ MonoBehaviour:
   SpawnCount: 40
   SpawnRadius: 1
   RandomSeed: 12345
+--- !u!114 &908324176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908324172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295560ba5ee0cbc4aa2a104b85e53ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveAction:
+    m_Name: Save
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: df727ed0-2629-45ee-8707-1a77be0fd222
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6e9baf09-25cc-4983-bf65-b1bc8298f2ce
+      m_Path: <Keyboard>/z
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Save
+      m_Flags: 0
+    m_Flags: 0
+  LoadAction:
+    m_Name: Load
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 25ba8adb-0d44-422c-862a-d47610d13f3b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bedc1baf-b22b-4277-8e43-f1cfb2b7168c
+      m_Path: <Keyboard>/x
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Load
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &989639190
 GameObject:
   m_ObjectHideFlags: 0

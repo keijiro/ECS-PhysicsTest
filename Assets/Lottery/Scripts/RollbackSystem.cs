@@ -9,15 +9,28 @@ namespace EcsPhysicsTest.Lottery {
 [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
 public partial class RollbackSystem : SystemBase
 {
-    public static void RequestSave() => _request.save = true;
-    public static void RequestLoad() => _request.load = true;
-
-    static (bool save, bool load) _request;
-
-    NativeArray<(LocalTransform xform, PhysicsVelocity velocity)> _record;
+    #region SystemBase overrides
 
     protected override void OnCreate()
-      => RequireForUpdate<Lottery>();
+      => RequireForUpdate<Rollback>();
+
+    protected override void OnUpdate()
+    {
+        var rollback = SystemAPI.ManagedAPI.GetSingleton<Rollback>();
+        if (!rollback.SaveAction.enabled)
+        {
+            rollback.SaveAction.performed += _ => SaveState();
+            rollback.LoadAction.performed += _ => LoadState();
+            rollback.SaveAction.Enable();
+            rollback.LoadAction.Enable();
+        }
+    }
+
+    #endregion
+
+    #region Rollback system implementation
+
+    NativeArray<(LocalTransform xform, PhysicsVelocity velocity)> _record;
 
     void LoadState()
     {
@@ -47,12 +60,7 @@ public partial class RollbackSystem : SystemBase
                           record[i++] = (xform, velocity) ).Schedule();
     }
 
-    protected override void OnUpdate()
-    {
-        if (_request.save) SaveState();
-        if (_request.load) LoadState();
-        _request = (false, false);
-    }
+    #endregion
 }
 
 } // namespace EcsPhysicsTest.Lottery
