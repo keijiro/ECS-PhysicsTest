@@ -5,4 +5,4 @@
 
 This repository contains basic samples for [Unity Physics (ECS/DOTS)](https://docs.unity3d.com/Packages/com.unity.physics@latest).
 
-I'll publish a tutorial video about this project on YouTube. Please stay tuned.
+The tutorial video is available on [YouTube](https://www.youtube.com/watch?v=TZMB3jKnJuQ).
