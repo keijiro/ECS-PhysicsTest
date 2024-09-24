@@ -26,7 +26,7 @@ public partial struct SpawnSystem : ISystem
         {
             var pos = rand.NextFloat3InSphere() * config.SpawnRadius;
             var xform = SystemAPI.GetComponentRW<LocalTransform>(entity);
-            xform.ValueRW = LocalTransform.FromPosition(pos);
+            xform.ValueRW.Position = pos;
         }
 
         state.Enabled = false;

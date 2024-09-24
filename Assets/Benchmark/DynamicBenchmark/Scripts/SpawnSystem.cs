@@ -35,7 +35,8 @@ public partial struct SpawnSystem : ISystem
                     var r = rand.NextQuaternionRotation();
 
                     var xform = SystemAPI.GetComponentRW<LocalTransform>(instances[index++]);
-                    xform.ValueRW = LocalTransform.FromPositionRotation(p, r);
+                    xform.ValueRW.Position = p;
+                    xform.ValueRW.Rotation = r;
                 }
 
         state.Enabled = false;
