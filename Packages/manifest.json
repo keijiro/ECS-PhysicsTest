@@ -1,12 +1,13 @@
 {
   "dependencies": {
-    "com.unity.entities.graphics": "1.2.4",
-    "com.unity.inputsystem": "1.11.0",
-    "com.unity.physics": "1.2.4",
-    "com.unity.render-pipelines.universal": "17.0.3",
-    "jp.keijiro.klak.math": "2.1.0",
-    "jp.keijiro.metatex": "1.0.4",
-    "jp.keijiro.metawire": "2.1.1",
+    "com.unity.entities.graphics": "1.4.19",
+    "com.unity.inputsystem": "1.19.0",
+    "com.unity.physics": "1.4.6",
+    "com.unity.render-pipelines.universal": "17.3.0",
+    "jp.keijiro.klak.lineargradient": "1.0.3",
+    "jp.keijiro.klak.math": "2.1.1",
+    "jp.keijiro.metatex": "1.0.6",
+    "jp.keijiro.metawire": "2.1.2",
     "com.unity.modules.uielements": "1.0.0"
   },
   "scopedRegistries": [
