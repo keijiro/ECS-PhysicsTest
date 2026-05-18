@@ -14,6 +14,9 @@ public partial class RollbackSystem : SystemBase
     protected override void OnCreate()
       => RequireForUpdate<Rollback>();
 
+    protected override void OnDestroy()
+      => _record.Dispose();
+
     protected override void OnUpdate()
     {
         var rollback = SystemAPI.ManagedAPI.GetSingleton<Rollback>();
@@ -30,34 +33,39 @@ public partial class RollbackSystem : SystemBase
 
     #region Rollback system implementation
 
-    NativeArray<(LocalTransform xform, PhysicsVelocity velocity)> _record;
+    NativeArray<(Entity entity, LocalTransform xform, PhysicsVelocity velocity)> _record;
 
     void LoadState()
     {
         if (!_record.IsCreated) return;
 
-        var (record, i) = (_record, 0);
-        Entities.ForEach( (ref LocalTransform xform,
-                           ref PhysicsVelocity velocity) =>
-                          (xform, velocity) = record[i++] ).Schedule();
+        Dependency.Complete();
+
+        foreach (var (entity, xform, velocity) in _record)
+        {
+            EntityManager.SetComponentData(entity, xform);
+            EntityManager.SetComponentData(entity, velocity);
+        }
     }
 
     void SaveState()
     {
+        Dependency.Complete();
+
         if (_record.IsCreated) _record.Dispose();
 
-        var count = 0;
-        Entities.ForEach( (in LocalTransform xform,
-                           in PhysicsVelocity velocity) =>
-                          count++ ).Run();
+        var query = SystemAPI.QueryBuilder()
+          .WithAll<LocalTransform, PhysicsVelocity>()
+          .Build();
 
-        _record = new NativeArray<(LocalTransform, PhysicsVelocity)>
-          (count, Allocator.Persistent);
+        _record = new NativeArray<(Entity, LocalTransform, PhysicsVelocity)>
+          (query.CalculateEntityCount(), Allocator.Persistent);
 
-        var (record, i) = (_record, 0);
-        Entities.ForEach( (in LocalTransform xform,
-                           in PhysicsVelocity velocity) =>
-                          record[i++] = (xform, velocity) ).Schedule();
+        var i = 0;
+        foreach (var (xform, velocity, entity) in
+                 SystemAPI.Query<RefRO<LocalTransform>, RefRO<PhysicsVelocity>>()
+                          .WithEntityAccess())
+            _record[i++] = (entity, xform.ValueRO, velocity.ValueRO);
     }
 
     #endregion
